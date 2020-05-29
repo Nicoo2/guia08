@@ -2,6 +2,9 @@ package frsf.isi.died.guia08.problema01.modelo;
 
 import java.time.LocalDateTime;
 
+import frsf.isi.died.guia08.problema01.util.EmpleadoAsignadoException;
+import frsf.isi.died.guia08.problema01.util.TareaFinalizadaException;
+
 public class Tarea {
 
 	private Integer id;
@@ -12,10 +15,25 @@ public class Tarea {
 	private LocalDateTime fechaFin;
 	private Boolean facturada;
 	
-	public void asignarEmpleado(Empleado e) {
-		// si la tarea ya tiene un empleado asignado
-		// y tiene fecha de finalizado debe lanzar una excepcion
+	public void asignarEmpleado(Empleado e) throws TareaFinalizadaException, EmpleadoAsignadoException {
+		if(this.fechaFin != null) {
+			throw new TareaFinalizadaException();
+		}
+		if(this.empleadoAsignado != null) {
+			throw new EmpleadoAsignadoException();
+		}	
+		this.empleadoAsignado = e;	
 	}
+
+	public Tarea(Integer id, String descripcion, Integer duracionEstimada) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.duracionEstimada = duracionEstimada;
+		this.facturada = false;
+	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -69,5 +87,9 @@ public class Tarea {
 		return empleadoAsignado;
 	}
 	
+	public String asCsv() {
+		return this.id+ ";\""+ this.descripcion+"\";"+this.facturada +";\"" +this.getFechaInicio() +";\""+ this.getFechaFin()+";\""
+				+ this.getEmpleadoAsignado().getCuil()+";\"" + this.empleadoAsignado.getNombre() +";\"" ;
+		}
 	
 }
