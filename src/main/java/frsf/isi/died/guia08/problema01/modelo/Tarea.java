@@ -31,9 +31,8 @@ public class Tarea {
 		this.descripcion = descripcion;
 		this.duracionEstimada = duracionEstimada;
 		this.facturada = false;
+		this.empleadoAsignado = null;
 	}
-
-
 
 	public Integer getId() {
 		return id;

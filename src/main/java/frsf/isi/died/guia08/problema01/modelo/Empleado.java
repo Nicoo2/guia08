@@ -150,7 +150,7 @@ public class Empleado {
 			throw new TareaFinalizadaException();
 		}
 		else if(this.puedeAsignarTarea.test(t)) { 
-			if(t.getEmpleadoAsignado() != null) {
+			if(t.getEmpleadoAsignado() == null) {
 				this.tareasAsignadas.add(t);
 				flag = true;
 			}
@@ -159,10 +159,10 @@ public class Empleado {
 				throw new EmpleadoAsignadoException(); // hay otro empleado asignado
 			}
 		}
-		else {
-			flag = false;
-			throw new TareaNoAsignableException(); //no se pudo asignar la tarea
-		}
+			else {
+				flag = false;
+				throw new TareaNoAsignableException(); //no se pudo asignar la tarea
+			}
 		return flag;
 	}
 	

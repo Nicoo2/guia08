@@ -1,6 +1,7 @@
 package frsf.isi.died.guia08.problema01;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -19,6 +20,32 @@ public class AppRRHH {
 	private List<Empleado> empleados;
 	private List<Tarea> tareas;
 	
+
+	public AppRRHH() {
+		super();
+		this.empleados = new ArrayList<Empleado>();
+		this.tareas = new ArrayList<Tarea>();
+	}
+
+	///
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+	public List<Tarea> getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(List<Tarea> tareas) {
+		this.tareas = tareas;
+	}
+	
+
+	///
 	
 	public void agregarEmpleadoContratado(Integer cuil,String nombre,Double costoHora) {
 		// crear un empleado
@@ -39,7 +66,8 @@ public class AppRRHH {
 		// con el método buscarEmpleado() de esta clase
 		// agregarlo a la lista		
 			try {
-				buscarEmpleado(e -> (e.getCuil() == cuil)).get().asignarTarea(new Tarea(idTarea, descripcion, duracionEstimada));
+				buscarEmpleado((Empleado e) -> (e.getCuil() == cuil)).get().asignarTarea(new Tarea(idTarea, descripcion, duracionEstimada));
+				//this.empleados.stream().filter((Empleado e) -> (e.getCuil() == cuil)).findFirst().get().asignarTarea(new Tarea(idTarea, descripcion, duracionEstimada));
 			} catch (EmpleadoAsignadoException e) {
 				//e.printStackTrace();
 				System.out.println(e.getMessage());

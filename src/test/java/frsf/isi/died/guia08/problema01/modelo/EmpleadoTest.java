@@ -113,7 +113,12 @@ public class EmpleadoTest {
 	
 	@Test
 	public void testCostoTarea() {
-
+			// 25 costo * 15 horas
+		Double costo = e1.costoTarea(t1);
+		Double esperado = 375.0;
+		
+		assertEquals(esperado, costo);
+		
 	}
 
 
